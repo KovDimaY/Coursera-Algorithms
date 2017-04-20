@@ -8,17 +8,28 @@ public class Program {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+
+		// file with data provided by Coursera
 		MyFileReader dataFile = new MyFileReader("data.txt");
+
+		// initializing my counter
 		InversionCounter counter = new InversionCounter();
-				
-		int[] a = {1, 5, 4};
-		
-		int b = counter.numberInversions(a);
-		
-		System.out.println(b);
-		
-		
-		
+
+		// getting data from the file
+		int[] data = dataFile.getContentArray();
+
+		// solving the problem if it is possible
+		if (data != null) {
+			long answer = counter.numberInversions(data);
+
+			// printing the result
+			System.out.println("Answer: " + answer);
+		} else {
+
+			System.out.println("Sorry, but your data is invalid. "
+					+ "Check it please and try again!");
+		}
+
 	}
 
 }

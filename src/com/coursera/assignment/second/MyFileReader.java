@@ -10,13 +10,35 @@ import java.util.List;
 public class MyFileReader {
 	
 	private String path;
+	private int length;
+	private List<Integer> contentList;
+	private int[] contentArray;
 	
 	public MyFileReader(String fileName) {
 		this.path = "./resources/" + fileName;
+		this.contentList = this.readFile();
+		this.contentArray = this.convertToArray();		
+	}
+	
+	public int getLength() {
+		return this.length;
+	}
+	
+	public int[] getContentArray() { 
+		return this.contentArray;
+	}
+	
+	public List<Integer> getContentList() {
+		return this.contentList;
+	}
+	
+	public String getPath() {
+		return this.path;
 	}
 	
 	private List<Integer> readFile(){
 		List<Integer> result = new ArrayList<Integer>();
+		this.length = 0;
 		
         // This will reference one line at a time
         String line = null;
@@ -32,7 +54,8 @@ public class MyFileReader {
 
             while((line = bufferedReader.readLine()) != null) {
             	try {
-            	result.add(new Integer(line));  
+            	result.add(new Integer(line)); 
+            	this.length++;
             	} catch (NumberFormatException e) {
             		System.out.println(line + "does not have correct format");
             		return null;
@@ -56,7 +79,7 @@ public class MyFileReader {
 		return result;
 	}
 	
-	public int[] getValue() {
+	private int[] convertToArray() {
 		List<Integer> list = this.readFile();
 		int[] array = new int[list.size()];
 		

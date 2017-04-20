@@ -8,8 +8,17 @@ public class Program {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		MyFileReader dataFile = new MyFileReader("test.txt");
-		System.out.print(Arrays.toString(dataFile.getValue()));
+		MyFileReader dataFile = new MyFileReader("data.txt");
+		InversionCounter counter = new InversionCounter();
+				
+		int[] a = {1, 5, 4};
+		
+		int b = counter.numberInversions(a);
+		
+		System.out.println(b);
+		
+		
+		
 	}
 
 }

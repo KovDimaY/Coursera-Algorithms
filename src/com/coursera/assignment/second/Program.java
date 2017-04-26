@@ -38,7 +38,7 @@ public class Program {
 		if (data4sort != null && data4sort.length > 0) {
 			long answerFirst = comparisonCounter.numberComparisonFirst(data4sort);
 			long answerSecond = comparisonCounter.numberComparisonLast(data4sort);
-			long answerThird = comparisonCounter.numberComparisonMediana(data4sort);
+			long answerThird = comparisonCounter.numberComparisonMiddle(data4sort);
 	
 			// printing the result
 			System.out.println("RESULTS OF THE COMPARISONS PROBLEM:");

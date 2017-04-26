@@ -5,33 +5,107 @@ import java.util.Arrays;
 public class ComparisonCounter {
 	
 	public long numberComparisonFirst(int[] data) {
-		return 1;
-	}
-	
-	public long numberComparisonLast(int[] data) {
-		return 2;		
-	}
-	
-	public long numberComparisonMediana(int[] data) {
-		return 3;		
-	}
-	// function that calculates split inversions
-	private long mergeCount(int[] left, int[] right) {
-		int idxLeft = 0;
-		int idxRight = 0;
-		long result = 0;
-
-		// basic merge subroutine (adapted)
-		while (idxLeft < left.length && idxRight < right.length) {
-			if (left[idxLeft] <= right[idxRight]) {
-				idxLeft++;
-			} else {
-				idxRight++;
-				// if there are smaller elements in the right part
-				// so all elements that left on the left part are inversions
-				result += left.length - idxLeft;
-			}
-		}
+		int[] temp = Arrays.copyOf(data, data.length);
+		long result = this.sortFirst(temp, 0, temp.length);
 		return result;
+	}
+		
+	public long numberComparisonLast(int[] data) {
+		int[] temp = Arrays.copyOf(data, data.length);
+		long result = this.sortLast(temp, 0, temp.length);
+		return result;		
+	}
+	
+	public long numberComparisonMiddle(int[] data) {
+		int[] temp = Arrays.copyOf(data, data.length);
+		long result = this.sortMiddle(temp, 0, temp.length);
+		return result;		
+	}
+	
+	private long sortFirst(int[] data, int begin, int end){
+		if (end - begin < 2){
+			return 0;
+		} else {
+			int i = begin+1;
+			
+			for (int j = begin+1; j < end; j++){
+				if (data[begin] > data[j]){
+					if(j != i) {
+						// swap of values
+						data[i] = data[i] + data[j];
+						data[j] = data[i] - data[j];
+						data[i] = data[i] - data[j];					
+					}
+					i++;
+				}
+			}
+			if ((i-1) != begin) {
+				// final swap of the pivot element
+				data[i-1] = data[i-1] + data[begin];
+				data[begin] = data[i-1] - data[begin];
+				data[i-1] = data[i-1] - data[begin];
+			}	
+			long left = this.sortFirst(data, begin, i-1);
+			long right = this.sortFirst(data, i, end);
+			return left + right + end - begin - 1; 
+		}
+	}
+
+	private long sortLast(int[] data, int begin, int end){
+		if (end - begin < 2){
+			return 0;
+		} else {
+			int i = begin+1;
+			
+			for (int j = begin+1; j < end; j++){
+				if (data[begin] > data[j]){
+					if(j != i) {
+						// swap of values
+						data[i] = data[i] + data[j];
+						data[j] = data[i] - data[j];
+						data[i] = data[i] - data[j];					
+					}
+					i++;
+				}
+			}
+			if ((i-1) != begin) {
+				// final swap of the pivot element
+				data[i-1] = data[i-1] + data[begin];
+				data[begin] = data[i-1] - data[begin];
+				data[i-1] = data[i-1] - data[begin];
+			}	
+			long left = this.sortFirst(data, begin, i-1);
+			long right = this.sortFirst(data, i, end);
+			return left + right + end - begin - 1; 
+		}
+	}
+	
+	private long sortMiddle(int[] data, int begin, int end){
+		if (end - begin < 2){
+			return 0;
+		} else {
+			int i = begin+1;
+			
+			for (int j = begin+1; j < end; j++){
+				if (data[begin] > data[j]){
+					if(j != i) {
+						// swap of values
+						data[i] = data[i] + data[j];
+						data[j] = data[i] - data[j];
+						data[i] = data[i] - data[j];					
+					}
+					i++;
+				}
+			}
+			if ((i-1) != begin) {
+				// final swap of the pivot element
+				data[i-1] = data[i-1] + data[begin];
+				data[begin] = data[i-1] - data[begin];
+				data[i-1] = data[i-1] - data[begin];
+			}	
+			long left = this.sortFirst(data, begin, i-1);
+			long right = this.sortFirst(data, i, end);
+			return left + right + end - begin - 1; 
+		}
 	}
 }

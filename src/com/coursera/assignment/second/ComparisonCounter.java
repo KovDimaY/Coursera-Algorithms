@@ -55,8 +55,14 @@ public class ComparisonCounter {
 		if (end - begin < 2){
 			return 0;
 		} else {
-			int i = begin+1;
 			
+			// swap of values
+			data[begin] = data[begin] + data[end-1];
+			data[end-1] = data[begin] - data[end-1];
+			data[begin] = data[begin] - data[end-1];
+			
+			int i = begin+1;
+						
 			for (int j = begin+1; j < end; j++){
 				if (data[begin] > data[j]){
 					if(j != i) {
@@ -74,8 +80,8 @@ public class ComparisonCounter {
 				data[begin] = data[i-1] - data[begin];
 				data[i-1] = data[i-1] - data[begin];
 			}	
-			long left = this.sortFirst(data, begin, i-1);
-			long right = this.sortFirst(data, i, end);
+			long left = this.sortLast(data, begin, i-1);
+			long right = this.sortLast(data, i, end);
 			return left + right + end - begin - 1; 
 		}
 	}

@@ -17,7 +17,7 @@ public class MyFileReader {
 	public MyFileReader(String fileName) {
 		this.path = "./resources/" + fileName;
 		this.contentList = this.readFile();
-		this.contentArray = this.convertToArray();
+		this.contentArray = this.convertToArray();			
 	}
 
 	public int getLength() {

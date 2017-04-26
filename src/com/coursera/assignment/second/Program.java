@@ -9,23 +9,44 @@ public class Program {
 	 */
 	public static void main(String[] args) {
 
-		// file with data provided by Coursera
-		MyFileReader dataFile = new MyFileReader("data.txt");
+		// files with data provided by Coursera
+		MyFileReader inversionsDataFile = new MyFileReader("InversionsData.txt");
+		MyFileReader sortDataFile = new MyFileReader("test.txt");
 
-		// initializing my counter
-		InversionCounter counter = new InversionCounter();
+		// initializing counters
+		InversionCounter inversionCounter = new InversionCounter();
+		ComparisonCounter comparisonCounter = new ComparisonCounter();
 
 		// getting data from the file
-		int[] data = dataFile.getContentArray();
+		int[] data4inversions = inversionsDataFile.getContentArray();
+		int[] data4sort = sortDataFile.getContentArray();
 
-		// solving the problem if it is possible
-		if (data != null) {
-			long answer = counter.numberInversions(data);
+		// solving the problem of inversions if it is possible
+		if (data4inversions != null && data4inversions.length > 0) {
+			long answer = inversionCounter.numberInversions(data4inversions);
 
 			// printing the result
-			System.out.println("Answer: " + answer);
+			System.out.println("RESULTS OF THE INVERSIONS PROBLEM:");
+			System.out.println("Number of inversions: " + answer + "\n\n");
 		} else {
 
+			System.out.println("Sorry, but your data is invalid. "
+					+ "Check it please and try again!");
+		}
+		
+		// solving the problem of comparison if it is possible
+		if (data4sort != null && data4sort.length > 0) {
+			long answerFirst = comparisonCounter.numberComparisonFirst(data4sort);
+			long answerSecond = comparisonCounter.numberComparisonLast(data4sort);
+			long answerThird = comparisonCounter.numberComparisonMediana(data4sort);
+	
+			// printing the result
+			System.out.println("RESULTS OF THE COMPARISONS PROBLEM:");
+			System.out.println("Comparisons first pivot: " + answerFirst);
+			System.out.println("Comparisons last pivot: " + answerSecond);
+			System.out.println("Comparisons central pivot: " + answerThird + "\n\n");
+		} else {
+	
 			System.out.println("Sorry, but your data is invalid. "
 					+ "Check it please and try again!");
 		}

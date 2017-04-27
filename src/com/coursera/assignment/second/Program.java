@@ -41,6 +41,7 @@ public class Program {
 			long answerThird = comparisonCounter.numberComparisonMiddle(data4sort);
 	
 			// printing the result
+			System.out.println(Arrays.toString(data4sort));
 			System.out.println("RESULTS OF THE COMPARISONS PROBLEM:");
 			System.out.println("Comparisons first pivot: " + answerFirst);
 			System.out.println("Comparisons last pivot: " + answerSecond);

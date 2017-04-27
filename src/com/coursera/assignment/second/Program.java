@@ -11,7 +11,7 @@ public class Program {
 
 		// files with data provided by Coursera
 		MyFileReader inversionsDataFile = new MyFileReader("InversionsData.txt");
-		MyFileReader sortDataFile = new MyFileReader("test.txt");
+		MyFileReader sortDataFile = new MyFileReader("ComparisonsData.txt");
 
 		// initializing counters
 		InversionCounter inversionCounter = new InversionCounter();
@@ -41,7 +41,6 @@ public class Program {
 			long answerThird = comparisonCounter.numberComparisonMiddle(data4sort);
 	
 			// printing the result
-			System.out.println(Arrays.toString(data4sort));
 			System.out.println("RESULTS OF THE COMPARISONS PROBLEM:");
 			System.out.println("Comparisons first pivot: " + answerFirst);
 			System.out.println("Comparisons last pivot: " + answerSecond);

@@ -7,21 +7,18 @@ public class ComparisonCounter {
 	public long numberComparisonFirst(int[] data) {
 		int[] temp = Arrays.copyOf(data, data.length);
 		long result = this.sortFirst(temp, 0, temp.length);
-		System.out.println(Arrays.toString(temp));
 		return result;
 	}
 		
 	public long numberComparisonLast(int[] data) {
 		int[] temp = Arrays.copyOf(data, data.length);
 		long result = this.sortLast(temp, 0, temp.length);
-		System.out.println(Arrays.toString(temp));
 		return result;		
 	}
 	
 	public long numberComparisonMiddle(int[] data) {
 		int[] temp = Arrays.copyOf(data, data.length);
 		long result = this.sortMiddle(temp, 0, temp.length);
-		System.out.println(Arrays.toString(temp));
 		return result;		
 	}
 	
@@ -94,21 +91,16 @@ public class ComparisonCounter {
 			return 0;
 		} else {
 			
-			int middleIndex = (begin + end)/2;
+			int middleIndex = (begin + end - 1)/2;
 			int medianIndex = this.medianIndex(data[begin], data[middleIndex], data[end-1], 
 												begin, middleIndex, end-1);
 			
-			
-			 System.out.println(data[begin] + ", " + data[middleIndex] + ", " + data[end-1] +
-					" => " + data[medianIndex]);
-			 
-			 System.out.println(begin + ", " + end + " => " + middleIndex);
-			
-			
-			// swap of values
-			data[begin] = data[begin] + data[medianIndex];
-			data[medianIndex] = data[begin] - data[medianIndex];
-			data[begin] = data[begin] - data[medianIndex];
+			if (medianIndex != begin){
+				// swap of values
+				data[begin] = data[begin] + data[medianIndex];
+				data[medianIndex] = data[begin] - data[medianIndex];
+				data[begin] = data[begin] - data[medianIndex];
+			}
 			
 			int i = begin+1;
 			

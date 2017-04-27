@@ -30,21 +30,14 @@ public class ComparisonCounter {
 			
 			for (int j = begin+1; j < end; j++){
 				if (data[begin] > data[j]){
-					if(j != i) {
-						// swap of values
-						data[i] = data[i] + data[j];
-						data[j] = data[i] - data[j];
-						data[i] = data[i] - data[j];					
-					}
+					// swap of values
+					this.swap(data, i, j);	
 					i++;
 				}
 			}
-			if ((i-1) != begin) {
-				// final swap of the pivot element
-				data[i-1] = data[i-1] + data[begin];
-				data[begin] = data[i-1] - data[begin];
-				data[i-1] = data[i-1] - data[begin];
-			}	
+			// final swap of the pivot element
+			this.swap(data, begin, i-1);
+						
 			long left = this.sortFirst(data, begin, i-1);
 			long right = this.sortFirst(data, i, end);
 			return left + right + end - begin - 1; 
@@ -57,29 +50,20 @@ public class ComparisonCounter {
 		} else {
 			
 			// swap of values
-			data[begin] = data[begin] + data[end-1];
-			data[end-1] = data[begin] - data[end-1];
-			data[begin] = data[begin] - data[end-1];
+			this.swap(data, begin, end-1);
 			
 			int i = begin+1;
 						
 			for (int j = begin+1; j < end; j++){
 				if (data[begin] > data[j]){
-					if(j != i) {
-						// swap of values
-						data[i] = data[i] + data[j];
-						data[j] = data[i] - data[j];
-						data[i] = data[i] - data[j];					
-					}
+					// swap of values
+					this.swap(data, i, j);	
 					i++;
 				}
 			}
-			if ((i-1) != begin) {
-				// final swap of the pivot element
-				data[i-1] = data[i-1] + data[begin];
-				data[begin] = data[i-1] - data[begin];
-				data[i-1] = data[i-1] - data[begin];
-			}	
+			// final swap of the pivot element
+			this.swap(data, begin, i-1);
+						
 			long left = this.sortLast(data, begin, i-1);
 			long right = this.sortLast(data, i, end);
 			return left + right + end - begin - 1; 
@@ -94,36 +78,33 @@ public class ComparisonCounter {
 			int middleIndex = (begin + end - 1)/2;
 			int medianIndex = this.medianIndex(data[begin], data[middleIndex], data[end-1], 
 												begin, middleIndex, end-1);
-			
-			if (medianIndex != begin){
-				// swap of values
-				data[begin] = data[begin] + data[medianIndex];
-				data[medianIndex] = data[begin] - data[medianIndex];
-				data[begin] = data[begin] - data[medianIndex];
-			}
-			
+			// swap of values
+			this.swap(data, begin, medianIndex);
+						
 			int i = begin+1;
 			
 			for (int j = begin+1; j < end; j++){
 				if (data[begin] > data[j]){
-					if(j != i) {
-						// swap of values
-						data[i] = data[i] + data[j];
-						data[j] = data[i] - data[j];
-						data[i] = data[i] - data[j];					
-					}
+					// swap of values
+					this.swap(data, i, j);					
 					i++;
 				}
 			}
-			if ((i-1) != begin) {
-				// final swap of the pivot element
-				data[i-1] = data[i-1] + data[begin];
-				data[begin] = data[i-1] - data[begin];
-				data[i-1] = data[i-1] - data[begin];
-			}	
+			// final swap of the pivot element
+			this.swap(data, begin, i-1);	
+				
 			long left = this.sortMiddle(data, begin, i-1);
 			long right = this.sortMiddle(data, i, end);
 			return left + right + end - begin - 1; 
+		}
+	}
+	
+	private void swap(int[] data, int index1, int index2) {
+		if(index1 != index2) {
+			// swap of values
+			data[index1] = data[index1] + data[index2];
+			data[index2] = data[index1] - data[index2];
+			data[index1] = data[index1] - data[index2];					
 		}
 	}
 	
@@ -138,7 +119,6 @@ public class ComparisonCounter {
 			return ia;
 		} else {
 			return ib;
-		}
-		
+		}		
 	}
 }

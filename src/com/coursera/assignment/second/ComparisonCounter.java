@@ -1,8 +1,11 @@
 package com.coursera.assignment.second;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class ComparisonCounter {
+	
+	private Random myRandom = new Random();
 	
 	public long numberComparisonFirst(int[] data) {
 		int[] temp = Arrays.copyOf(data, data.length);
@@ -19,6 +22,12 @@ public class ComparisonCounter {
 	public long numberComparisonMiddle(int[] data) {
 		int[] temp = Arrays.copyOf(data, data.length);
 		long result = this.sortMiddle(temp, 0, temp.length);
+		return result;		
+	}
+	
+	public long numberComparisonRandom(int[] data) {
+		int[] temp = Arrays.copyOf(data, data.length);
+		long result = this.sortRandom(temp, 0, temp.length);
 		return result;		
 	}
 	
@@ -80,6 +89,33 @@ public class ComparisonCounter {
 												begin, middleIndex, end-1);
 			// swap of values
 			this.swap(data, begin, medianIndex);
+						
+			int i = begin+1;
+			
+			for (int j = begin+1; j < end; j++){
+				if (data[begin] > data[j]){
+					// swap of values
+					this.swap(data, i, j);					
+					i++;
+				}
+			}
+			// final swap of the pivot element
+			this.swap(data, begin, i-1);	
+				
+			long left = this.sortMiddle(data, begin, i-1);
+			long right = this.sortMiddle(data, i, end);
+			return left + right + end - begin - 1; 
+		}
+	}
+	
+	private long sortRandom(int[] data, int begin, int end){
+		if (end - begin < 2){
+			return 0;
+		} else {
+			
+			int randomIndex = begin + this.myRandom.nextInt(end - begin);
+			// swap of values
+			this.swap(data, begin, randomIndex);
 						
 			int i = begin+1;
 			

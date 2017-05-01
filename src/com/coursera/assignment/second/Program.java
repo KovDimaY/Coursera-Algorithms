@@ -39,12 +39,14 @@ public class Program {
 			long answerFirst = comparisonCounter.numberComparisonFirst(data4sort);
 			long answerSecond = comparisonCounter.numberComparisonLast(data4sort);
 			long answerThird = comparisonCounter.numberComparisonMiddle(data4sort);
+			long answerFourth = comparisonCounter.numberComparisonRandom(data4sort);
 	
 			// printing the result
 			System.out.println("RESULTS OF THE COMPARISONS PROBLEM:");
 			System.out.println("Comparisons first pivot: " + answerFirst);
 			System.out.println("Comparisons last pivot: " + answerSecond);
-			System.out.println("Comparisons central pivot: " + answerThird + "\n\n");
+			System.out.println("Comparisons central pivot: " + answerThird);
+			System.out.println("Comparisons random pivot: " + answerFourth + "\n\n");
 		} else {
 	
 			System.out.println("Sorry, but your data is invalid. "

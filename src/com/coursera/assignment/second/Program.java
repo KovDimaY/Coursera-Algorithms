@@ -1,5 +1,6 @@
 package com.coursera.assignment.second;
 
+import java.util.List;
 import java.util.Arrays;
 
 public class Program {
@@ -10,16 +11,21 @@ public class Program {
 	public static void main(String[] args) {
 
 		// files with data provided by Coursera
-		MyFileReader inversionsDataFile = new MyFileReader("InversionsData.txt");
-		MyFileReader sortDataFile = new MyFileReader("ComparisonsData.txt");
+		MyFileReader inversionsDataFile = new MyFileReader("InversionsData.txt", 
+															MyFileReader.DataType.NUMBER);
+		MyFileReader sortDataFile = new MyFileReader("ComparisonsData.txt",
+													  MyFileReader.DataType.NUMBER);
+		MyFileReader treeDataFile = new MyFileReader("test.txt", 
+													  MyFileReader.DataType.LINE);
 
 		// initializing counters
 		InversionCounter inversionCounter = new InversionCounter();
 		ComparisonCounter comparisonCounter = new ComparisonCounter();
 
 		// getting data from the file
-		int[] data4inversions = inversionsDataFile.getContentArray();
-		int[] data4sort = sortDataFile.getContentArray();
+		int[] data4inversions = inversionsDataFile.getContentNumArray();
+		int[] data4sort = sortDataFile.getContentNumArray();
+		List<int[]> data4tree = treeDataFile.getContenLinetList();
 
 		// solving the problem of inversions if it is possible
 		if (data4inversions != null && data4inversions.length > 0) {
@@ -52,7 +58,14 @@ public class Program {
 			System.out.println("Sorry, but your data is invalid. "
 					+ "Check it please and try again!");
 		}
+		
+		for (int i=0; i<data4tree.size(); i++){
+			System.out.println(Arrays.toString(data4tree.get(i)));
+		}
+		
 
 	}
+	
+	
 
 }

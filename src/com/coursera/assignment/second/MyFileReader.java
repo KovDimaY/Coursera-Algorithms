@@ -5,40 +5,52 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MyFileReader {
 
 	private String path;
 	private int length;
-	private List<Integer> contentList;
-	private int[] contentArray;
+	private List<Integer> contentNumList;
+	private int[] contentNumArray;
+	private List<int[]> contentLineList;
+	
+	public static enum DataType {LINE, NUMBER}
 
-	public MyFileReader(String fileName) {
+	public MyFileReader(String fileName, DataType type) {
 		this.path = "./resources/" + fileName;
-		this.contentList = this.readFile();
-		this.contentArray = this.convertToArray();			
+		if (type == DataType.NUMBER){
+			this.contentNumList = this.readNumFile();
+			this.contentNumArray = this.convertToNumArray();
+		} else {
+			this.contentLineList = this.readLineFile();
+		}		
 	}
 
 	public int getLength() {
 		return this.length;
 	}
 
-	public int[] getContentArray() {
-		return this.contentArray;
+	public int[] getContentNumArray() {
+		return this.contentNumArray;
 	}
 
-	public List<Integer> getContentList() {
-		return this.contentList;
+	public List<Integer> getContenNumtList() {
+		return this.contentNumList;
+	}
+
+	public List<int[]> getContenLinetList() {
+		return this.contentLineList;
 	}
 
 	public String getPath() {
 		return this.path;
 	}
 
-	// reading data from the file
+	// reading data (line = one number) from the file
 	// list - because I do not know the length of the file
-	private List<Integer> readFile() {
+	private List<Integer> readNumFile() {
 		List<Integer> result = new ArrayList<Integer>();
 		this.length = 0;
 
@@ -73,15 +85,84 @@ public class MyFileReader {
 		return result;
 	}
 
-	// converting to array because arrays are more
-	// optimized and faster
-	private int[] convertToArray() {
-		List<Integer> list = this.readFile();
+	// reading data (line = several numbers) from the file
+	// list - because I do not know the length of the file
+	private List<int[]> readLineFile() {
+		List<int[]> result = new ArrayList<int[]>();
+		this.length = 0;
+
+		// This will reference one line at a time
+		String line = null;
+
+		try {
+			// FileReader reads text files in the default encoding.
+			FileReader fileReader = new FileReader(this.path);
+
+			// Wrap FileReader in BufferedReader.
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+			while ((line = bufferedReader.readLine()) != null) {
+				result.add(this.lineToArray(line));
+				this.length++;				
+			}
+
+			// Always close files.
+			bufferedReader.close();
+		} catch (FileNotFoundException ex) {
+			System.out.println("Unable to open file '" + this.path + "'");
+		} catch (IOException ex) {
+			System.out.println("Error reading file '" + this.path + "'");
+		}
+
+		return result;
+	}
+	
+	
+	// converting to array of numbers 
+	// because arrays are more optimized and faster
+	private int[] convertToNumArray() {
+		List<Integer> list = this.contentNumList;
 		int[] array = new int[list.size()];
 
 		for (int i = 0; i < list.size(); i++) {
 			array[i] = list.get(i).intValue();
 		}
 		return array;
+	}
+		
+	private int[] lineToArray(String line){
+		line = line + " ";
+		int[] result = new int[numOfNumbers(line)];
+		int currentNumIdx = 0;
+		int currentNum = 0;
+		
+		for (int i = 0; i < line.length()-1; i++){
+			if (Character.isDigit(line.charAt(i))){
+				int digit = Integer.parseInt(String.valueOf(line.charAt(i)));
+				currentNum = currentNum*10 + digit;
+				if (Character.isWhitespace(line.charAt(i+1))){
+					result[currentNumIdx] = currentNum;
+					currentNum = 0;
+					currentNumIdx++;
+				}						
+			}	
+		}
+		
+		return result;
+	}
+		
+	private int numOfNumbers(String line){
+		int result = 0;
+		
+		for (int i = 0; i < line.length()-1; i++){
+			if (Character.isDigit(line.charAt(i)) && 
+					Character.isWhitespace(line.charAt(i+1))){
+				result++;
+			}
+		}
+		if (!Character.isWhitespace(line.charAt(line.length()-1))){
+			result++;
+		}
+		return result;
 	}
 }

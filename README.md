@@ -15,7 +15,7 @@ Inversion is a pair of indices (i, j) of a numeric array A where i<j and A[i] > 
 You can put `.txt` file with your data inside the folder `/resources` and in the main method of the class `Program` put the name of your file at the line 
 ```java
 // file with data provided by Coursera
-MyFileReader inversionsDataFile = new MyFileReader("InversionsData.txt");
+MyFileReader inversionsDataFile = new MyFileReader("InversionsData.txt", MyFileReader.DataType.NUMBER);
 ``` 
 and then just execute the program to get a result.
 
@@ -31,7 +31,7 @@ The task is to compute the total number of comparisons used to sort the given in
 You can put `.txt` file with your data inside the folder `/resources` and in the main method of the class `Program` put the name of your file at the line 
 ```java
 // file with data provided by Coursera
-MyFileReader sortDataFile = new MyFileReader("ComparisonsData.txt");
+MyFileReader sortDataFile = new MyFileReader("ComparisonsData.txt", MyFileReader.DataType.NUMBER);
 ``` 
 and then just execute the program to get a result.
 
@@ -55,7 +55,7 @@ A cut (S,T) in an undirected graph G=(V,E) is a partition of the vertices V into
 You can put `.txt` file with your data inside the folder `/resources` and in the main method of the class `Program` put the name of your file at the line 
 ```java
 // file with data provided by Coursera
-MyFileReader sortDataFile = new MyFileReader("MinCutData.txt");
+MyFileReader graphDataFile = new MyFileReader("MinCutData.txt", MyFileReader.DataType.LINE);
 ``` 
 and then just execute the program to get a result.
 

@@ -15,7 +15,7 @@ public class Program {
 															MyFileReader.DataType.NUMBER);
 		MyFileReader sortDataFile = new MyFileReader("ComparisonsData.txt",
 													  MyFileReader.DataType.NUMBER);
-		MyFileReader treeDataFile = new MyFileReader("test.txt", 
+		MyFileReader graphDataFile = new MyFileReader("test.txt", 
 													  MyFileReader.DataType.LINE);
 
 		// initializing counters
@@ -25,7 +25,7 @@ public class Program {
 		// getting data from the file
 		int[] data4inversions = inversionsDataFile.getContentNumArray();
 		int[] data4sort = sortDataFile.getContentNumArray();
-		List<int[]> data4tree = treeDataFile.getContenLinetList();
+		List<int[]> data4graph = graphDataFile.getContenLinetList();
 
 		// solving the problem of inversions if it is possible
 		if (data4inversions != null && data4inversions.length > 0) {
@@ -59,8 +59,8 @@ public class Program {
 					+ "Check it please and try again!");
 		}
 		
-		for (int i=0; i<data4tree.size(); i++){
-			System.out.println(Arrays.toString(data4tree.get(i)));
+		for (int i=0; i<data4graph.size(); i++){
+			System.out.println(Arrays.toString(data4graph.get(i)));
 		}
 		
 

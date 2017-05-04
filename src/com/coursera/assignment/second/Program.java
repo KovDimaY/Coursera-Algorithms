@@ -21,6 +21,7 @@ public class Program {
 		// initializing counters
 		InversionCounter inversionCounter = new InversionCounter();
 		ComparisonCounter comparisonCounter = new ComparisonCounter();
+		MinCutCounter grapghCut = new MinCutCounter();
 
 		// getting data from the file
 		int[] data4inversions = inversionsDataFile.getContentNumArray();
@@ -62,6 +63,8 @@ public class Program {
 		for (int i=0; i<data4graph.size(); i++){
 			System.out.println(Arrays.toString(data4graph.get(i)));
 		}
+		
+		grapghCut.partition(data4graph);
 		
 
 	}

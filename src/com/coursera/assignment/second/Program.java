@@ -15,7 +15,7 @@ public class Program {
 															MyFileReader.DataType.NUMBER);
 		MyFileReader sortDataFile = new MyFileReader("ComparisonsData.txt",
 													  MyFileReader.DataType.NUMBER);
-		MyFileReader graphDataFile = new MyFileReader("test.txt", 
+		MyFileReader graphDataFile = new MyFileReader("MinCutData.txt", 
 													  MyFileReader.DataType.LINE);
 
 		// initializing counters
@@ -60,15 +60,17 @@ public class Program {
 					+ "Check it please and try again!");
 		}
 		
-		for (int i=0; i<data4graph.size(); i++){
-			System.out.println(Arrays.toString(data4graph.get(i)));
+		// solving the problem of min cut if it is possible
+		if (data4sort != null && data4sort.length > 0) {
+			int minCut = grapghCut.minCut(data4graph);
+	
+			// printing the result
+			System.out.println("RESULTS OF THE MIN CUT PROBLEM:");
+			System.out.println("Min Cut: " + minCut);
+		} else {
+			
+			System.out.println("Sorry, but your data is invalid. "
+					+ "Check it please and try again!");
 		}
-		
-		grapghCut.partition(data4graph);
-		
-
 	}
-	
-	
-
 }

@@ -9,9 +9,27 @@ public class MinCutCounter {
 	
 	private Random myRandom = new Random();
 	
-	public void partition(List<int[]> data) {
-		
-		System.out.println("sdlflsdkflsdkf");
+	public int minCut(List<int[]> data) {
+		int minCut = this.minCutIteration(data);
+		int tempCut = minCut;
+		for (int i = 0; i < 500; i++) {
+			tempCut = this.minCutIteration(data);
+			if (tempCut < minCut) {
+				minCut = tempCut;
+			}
+		}
+		return minCut;
+	}
+	
+	private int minCutIteration(List<int[]> data) {
+		if (data.size() == 2) {
+			return data.get(0).length-1;
+		} else {
+			return minCutIteration(randomContraction(data));
+		}
+	}
+	
+	private List<int[]> randomContraction(List<int[]> data){
 		
 		int randRow = myRandom.nextInt(data.size());
 		int randIndex = myRandom.nextInt(data.get(randRow).length);
@@ -56,12 +74,7 @@ public class MinCutCounter {
 				result.add(tempArray);
 			}
 		}
-
-		System.out.println(baseElement);
-		System.out.println(randElement);
 		
-		for (int i=0; i<result.size(); i++){
-			System.out.println(Arrays.toString(result.get(i)));
-		}
+		return result;
 	}
 }

@@ -101,7 +101,7 @@ public class Program {
 		
 		// solving the problem of min cut if it is possible
 		if (SCCData != null && SCCData.size() > 0) {
-			int[] scc = sccCounter.fiveLargestSCC(SCCData);
+			int[] scc = sccCounter.fiveLargestSCC(SCCData, 9);
 	
 			// printing the result
 			System.out.println("RESULTS OF THE SCC PROBLEM:");

@@ -9,7 +9,16 @@ public class Program {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-
+		
+		// Divide and Conquer Algorithms 
+		// uncomment next line to see results
+		// firstCourseProblems();
+		
+		// Graph Search Algorithms
+		secondCourseProblems();
+	}
+	
+	public static void firstCourseProblems() {
 		// files with data provided by Coursera
 		MyFileReader inversionsDataFile = new MyFileReader("InversionsData.txt", 
 															MyFileReader.DataType.NUMBER);
@@ -61,7 +70,7 @@ public class Program {
 		}
 		
 		// solving the problem of min cut if it is possible
-		if (data4sort != null && data4sort.length > 0) {
+		if (data4graph != null && data4graph.size() > 0) {
 			int minCut = grapghCut.minCut(data4graph);
 	
 			// printing the result
@@ -72,5 +81,36 @@ public class Program {
 			System.out.println("Sorry, but your data is invalid. "
 					+ "Check it please and try again!");
 		}
+	}
+
+	public static void secondCourseProblems() {
+		// files with data provided by Coursera
+		MyFileReader SCCDataFile = new MyFileReader("test.txt", 
+													MyFileReader.DataType.LINE);
+		
+		// initializing counters
+		SCCCounter sccCounter = new SCCCounter();
+		
+		// getting data from the file
+		List<int[]> SCCData = SCCDataFile.getContenLinetList();
+		
+		for (int i=0; i<SCCData.size(); i++){
+			System.out.println(Arrays.toString(SCCData.get(i)));
+		}
+		System.out.println("*****************************************");
+		
+		// solving the problem of min cut if it is possible
+		if (SCCData != null && SCCData.size() > 0) {
+			int[] scc = sccCounter.fiveLargestSCC(SCCData);
+	
+			// printing the result
+			System.out.println("RESULTS OF THE SCC PROBLEM:");
+			System.out.println("Five biggest SCCs: " + Arrays.toString(scc));
+		} else {
+			
+			System.out.println("Sorry, but your data is invalid. "
+					+ "Check it please and try again!");
+		}
+		
 	}
 }

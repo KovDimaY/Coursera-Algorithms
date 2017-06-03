@@ -11,7 +11,6 @@ public class SCCCounter {
 	private int componentSize;
 	private int[] components;
 	private boolean[] visitedNodes;
-	private int[] labels;
 	private int[] finishingTimes;
 	int numberOfNodes;
 	
@@ -19,29 +18,31 @@ public class SCCCounter {
 		this.graph = graph;
 		this.numberOfNodes = numberOfNodes;
 		this.t = 0;
-		this.componentSize = 0;
-		
-		this.labels = new int[numberOfNodes];
+		this.componentSize = 0;	
 		this.finishingTimes = new int[numberOfNodes];
-		for(int i = 0; i < numberOfNodes; i++) {
-			labels[i] = i+1;
-		}
 		this.components = new int[] {0,0,0,0,0};
 		
 		this.visitedNodes = new boolean[numberOfNodes];
-		Arrays.fill(visitedNodes, false);
+		Arrays.fill(this.visitedNodes, false);
 	}
-	
 	
 	public int[] fiveLargestSCC() {		
 		List<List<Integer>> backwardOrder = this.formatGraph(this.graph, this.numberOfNodes, false);
 		List<List<Integer>> directOrder = this.formatGraph(this.graph, this.numberOfNodes, true);
+		System.out.println("backwardOrder: " + backwardOrder.size());
+		System.out.println("directOrder: " + directOrder.size());
+		int[] labels = new int[numberOfNodes];
+		this.finishingTimes = new int[numberOfNodes];
+		for(int i = 0; i < numberOfNodes; i++) {
+			labels[i] = i+1;
+		}
 		
-		System.out.println("List of nodes: " + Arrays.toString(this.labels));
-		System.out.println("List of visited nodes: " + Arrays.toString(this.visitedNodes));
+		DFS_loop(backwardOrder, labels);
+		Arrays.fill(this.visitedNodes, false);
+		labels = this.finishingTimes.clone();
+		this.components = new int[] {0,0,0,0,0};
 		
-		DFS_loop(directOrder, this.labels);
-		System.out.println("FinishingTimes of nodes: " + Arrays.toString(this.finishingTimes));
+		DFS_loop(directOrder, labels);
 		return this.components;
 	}
 	
@@ -52,31 +53,25 @@ public class SCCCounter {
 		for (int i = nodes.length-1; i >= 0; i--) {
 			if (!this.visitedNodes[nodes[i]-1]) {
 				s = nodes[i];
-				DFS(graph, nodes[i]-1, nodes);
+				DFS(graph, nodes[i]-1);
 			}
+			//saving component size:
+			this.components = this.saveComponentSize(this.components, this.componentSize);
+			this.componentSize = 0;
 		}
 		
 	}
 	
-	private void DFS(List<List<Integer>> graph, int node, int[] allNodes) {
-		System.out.println("visiting node " + (node+1));
+	private void DFS(List<List<Integer>> graph, int node) {
 		this.visitedNodes[node] = true;
 		this.componentSize++;
 		for (int i=0; i<graph.get(node).size(); i++){
 			if(!this.visitedNodes[graph.get(node).get(i)-1]) {
-				this.visitedNodes[graph.get(node).get(i)-1] = true;
-				DFS(graph, graph.get(node).get(i)-1, allNodes);
+				DFS(graph, graph.get(node).get(i)-1);
 			}
 		}
 		this.finishingTimes[t] = node+1;
-		this.t++;
-		
-		//saving component size:
-		this.components = this.saveComponentSize(this.components, this.componentSize);
-		System.out.println("Component : " + this.componentSize);
-		System.out.println("Components : " + Arrays.toString(this.components));
-		this.componentSize = 0;
-		
+		this.t++;	
 	}
 	
 	private int[] saveComponentSize(int[] array, int value) {
@@ -111,15 +106,6 @@ public class SCCCounter {
 				result.get(graph.get(i)[1]-1).add(new Integer(graph.get(i)[0]));
 			}
 		}
-		System.out.println("***********************Result of convertion***********************");
-		for (int i=0; i<result.size(); i++){
-			System.out.print("Node " + (i+1) + ": ");
-			for (int n = 0; n < result.get(i).size(); n++) {
-				System.out.print(result.get(i).get(n) + ", ");
-			}
-			System.out.println();
-		}
-		System.out.println("***********************Result of convertion***********************");
 		return result;
 	}
 	

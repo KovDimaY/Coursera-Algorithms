@@ -85,20 +85,21 @@ public class Program {
 
 	public static void secondCourseProblems() {
 		// files with data provided by Coursera
-		MyFileReader SCCDataFile = new MyFileReader("test.txt", 
+		MyFileReader SCCDataFile = new MyFileReader("CCSData.txt", 
 													MyFileReader.DataType.LINE);
 		
 		// getting data from the file
 		List<int[]> SCCData = SCCDataFile.getContenLinetList();
 		
 		// initializing counters
-		SCCCounter sccCounter = new SCCCounter(SCCData, 9);
+		SCCCounter sccCounter = new SCCCounter(SCCData, 875714);
 				
-		
+		/*
 		for (int i=0; i<SCCData.size(); i++){
 			System.out.println(Arrays.toString(SCCData.get(i)));
 		}
 		System.out.println("*****************************************");
+		*/
 		
 		// solving the problem of min cut if it is possible
 		if (SCCData != null && SCCData.size() > 0) {

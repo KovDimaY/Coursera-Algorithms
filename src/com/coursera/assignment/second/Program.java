@@ -88,11 +88,12 @@ public class Program {
 		MyFileReader SCCDataFile = new MyFileReader("test.txt", 
 													MyFileReader.DataType.LINE);
 		
-		// initializing counters
-		SCCCounter sccCounter = new SCCCounter();
-		
 		// getting data from the file
 		List<int[]> SCCData = SCCDataFile.getContenLinetList();
+		
+		// initializing counters
+		SCCCounter sccCounter = new SCCCounter(SCCData, 9);
+				
 		
 		for (int i=0; i<SCCData.size(); i++){
 			System.out.println(Arrays.toString(SCCData.get(i)));
@@ -101,7 +102,7 @@ public class Program {
 		
 		// solving the problem of min cut if it is possible
 		if (SCCData != null && SCCData.size() > 0) {
-			int[] scc = sccCounter.fiveLargestSCC(SCCData, 9);
+			int[] scc = sccCounter.fiveLargestSCC();
 	
 			// printing the result
 			System.out.println("RESULTS OF THE SCC PROBLEM:");

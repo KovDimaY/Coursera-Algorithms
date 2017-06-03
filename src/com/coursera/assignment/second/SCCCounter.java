@@ -7,62 +7,94 @@ import java.util.List;
 public class SCCCounter {
 	
 	private List<int[]> graph;
-	private int finishingTime;
+	private int t;
+	private int componentSize;
+	private int[] components;
 	private boolean[] visitedNodes;
 	private int[] labels;
+	private int[] finishingTimes;
 	int numberOfNodes;
 	
 	public SCCCounter(List<int[]> graph, int numberOfNodes) {
 		this.graph = graph;
 		this.numberOfNodes = numberOfNodes;
-		this.finishingTime = 0;
+		this.t = 0;
+		this.componentSize = 0;
 		
 		this.labels = new int[numberOfNodes];
+		this.finishingTimes = new int[numberOfNodes];
 		for(int i = 0; i < numberOfNodes; i++) {
 			labels[i] = i+1;
 		}
+		this.components = new int[] {0,0,0,0,0};
 		
 		this.visitedNodes = new boolean[numberOfNodes];
 		Arrays.fill(visitedNodes, false);
-		
 	}
 	
 	
-	public int[] fiveLargestSCC() {
-		int[] result = {0,0,0,0,0};
-		
+	public int[] fiveLargestSCC() {		
 		List<List<Integer>> backwardOrder = this.formatGraph(this.graph, this.numberOfNodes, false);
 		List<List<Integer>> directOrder = this.formatGraph(this.graph, this.numberOfNodes, true);
 		
 		System.out.println("List of nodes: " + Arrays.toString(this.labels));
 		System.out.println("List of visited nodes: " + Arrays.toString(this.visitedNodes));
 		
-		DFS_loop(directOrder, this.labels, this.visitedNodes);
-		return result;
+		DFS_loop(directOrder, this.labels);
+		System.out.println("FinishingTimes of nodes: " + Arrays.toString(this.finishingTimes));
+		return this.components;
 	}
 	
-	private void DFS_loop(List<List<Integer>> graph, int[] nodes, boolean[] visited) {
-		Integer finishingTime = 0;
+	private void DFS_loop(List<List<Integer>> graph, int[] nodes) {
+		this.t = 0;
 		int s = 0;
 		
 		for (int i = nodes.length-1; i >= 0; i--) {
-			if (!visited[nodes[i]-1]) {
+			if (!this.visitedNodes[nodes[i]-1]) {
 				s = nodes[i];
-				DFS(graph, nodes[i]-1, nodes, visited);
+				DFS(graph, nodes[i]-1, nodes);
 			}
 		}
+		
 	}
 	
-	private void DFS(List<List<Integer>> graph, int node, int[] allNodes, boolean[] visited) {
+	private void DFS(List<List<Integer>> graph, int node, int[] allNodes) {
 		System.out.println("visiting node " + (node+1));
-		visited[node] = true;
+		this.visitedNodes[node] = true;
+		this.componentSize++;
 		for (int i=0; i<graph.get(node).size(); i++){
-			if(!visited[graph.get(node).get(i)-1]) {
-				visited[graph.get(node).get(i)-1] = true;
-				DFS(graph, graph.get(node).get(i)-1, allNodes, visited);
+			if(!this.visitedNodes[graph.get(node).get(i)-1]) {
+				this.visitedNodes[graph.get(node).get(i)-1] = true;
+				DFS(graph, graph.get(node).get(i)-1, allNodes);
 			}
 		}
-		System.out.println("List of visited nodes: " + Arrays.toString(visited));
+		this.finishingTimes[t] = node+1;
+		this.t++;
+		
+		//saving component size:
+		this.components = this.saveComponentSize(this.components, this.componentSize);
+		System.out.println("Component : " + this.componentSize);
+		System.out.println("Components : " + Arrays.toString(this.components));
+		this.componentSize = 0;
+		
+	}
+	
+	private int[] saveComponentSize(int[] array, int value) {
+		int [] result = {0,0,0,0,0};
+		boolean inserted = false;
+		for (int i = 0; i < result.length; i++) {
+			if (!inserted) {
+				if (array[i] > value) {
+					result[i] = array[i];
+				} else {
+					result[i] = value;
+					inserted = true;
+				}
+			} else {
+				result[i] = array[i-1];
+			}
+		}
+		return result;
 	}
 	
 	private List<List<Integer>> formatGraph(List<int[]> graph, int numberOfNodes, boolean directOrder) {

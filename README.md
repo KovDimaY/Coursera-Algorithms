@@ -64,14 +64,6 @@ The file contains the edges of a directed graph. Vertices are labeled as positiv
 
 The task is to code up the algorithm from the video lectures for computing strongly connected components (SCCs), and to run this algorithm on the given graph.
 
-#### Relevance
-Min-cut has been used for identify weaknesses in the network. If it is needed to find a weakness in a transportation network of a particular country, one can simply present this network through a graph and find a minimum cuts of the graphs
-
-Another application is found in image processing, where min-cut algorithm is used for image segmentation.
-
-Another application of min-cut has been found in detection communities in social networks.
-
-
 #### What is SCCs
 A directed graph is called strongly connected if there is a path in each direction between each pair of vertices of the graph. Equivalently, a strongly connected component of a directed graph G is a subgraph that is strongly connected, and is maximal with this property: no additional edges or vertices from G can be included in the subgraph without breaking its property of being strongly connected. The collection of strongly connected components forms a partition of the set of vertices of G. 
 

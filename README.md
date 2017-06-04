@@ -59,3 +59,37 @@ MyFileReader graphDataFile = new MyFileReader("MinCutData.txt", MyFileReader.Dat
 ``` 
 and then just execute the program to get a result.
 
+### 4. Strongly Connected Components (SCCs) of Directed Graph
+The file contains the edges of a directed graph. Vertices are labeled as positive integers from 1 to 875714. Every row indicates an edge, the vertex label in first column is the tail and the vertex label in second column is the head (recall the graph is directed, and the edges are directed from the first column vertex to the second column vertex). So for example, the 11th row looks like: "2 47646". This just means that the vertex with label 2 has an outgoing edge to the vertex with label 47646.
+
+The task is to code up the algorithm from the video lectures for computing strongly connected components (SCCs), and to run this algorithm on the given graph.
+
+#### Relevance
+Min-cut has been used for identify weaknesses in the network. If it is needed to find a weakness in a transportation network of a particular country, one can simply present this network through a graph and find a minimum cuts of the graphs
+
+Another application is found in image processing, where min-cut algorithm is used for image segmentation.
+
+Another application of min-cut has been found in detection communities in social networks.
+
+
+#### What is SCCs
+A directed graph is called strongly connected if there is a path in each direction between each pair of vertices of the graph. Equivalently, a strongly connected component of a directed graph G is a subgraph that is strongly connected, and is maximal with this property: no additional edges or vertices from G can be included in the subgraph without breaking its property of being strongly connected. The collection of strongly connected components forms a partition of the set of vertices of G. 
+
+#### How to use the application
+You can put `.txt` file with your data inside the folder `/resources` and in the main method of the class `Program` put the name of your file at the line 
+```java
+// files with data provided by Coursera
+MyFileReader SCCDataFile = new MyFileReader("CCSData.txt", MyFileReader.DataType.LINE);
+``` 
+
+also you need to know how many nodes does graph have and you have to put this data in the next line
+```java
+// initializing counters
+SCCCounter sccCounter = new SCCCounter(SCCData, 875714);
+``` 
+and then just execute the program to get a result.
+
+#### Useful tip
+This problem requires quite deep recursion, so probably you will need to enlarge your stack in order to avoid `StackOverflowError`. In my case it was enough `-Xss10m`. For more detailes you can read a topic about it (for example here: 
+https://stackoverflow.com/questions/2127217/java-stack-overflow-error-how-to-increase-the-stack-size-in-eclipse)
+

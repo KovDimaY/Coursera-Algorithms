@@ -96,7 +96,6 @@ public class Program {
 		// List<int[]> SCCData = SCCDataFile.getContenLineList();
 		List<List<int[]>> dijkstraData = dijkstraDataFile.getContentArrayList();
 		
-		/*
 		for (int i = 0; i < dijkstraData.size(); i++) {
 			for (int j = 0; j < dijkstraData.get(i).size(); j++) {
 				System.out.print(Arrays.toString(dijkstraData.get(i).get(j)));
@@ -105,12 +104,11 @@ public class Program {
 			System.out.println("");
 		}
 		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n");
-		*/
 		
 		
 		// initializing counters
 		// SCCCounter sccCounter = new SCCCounter(SCCData, 875714);
-		DijkstraShortPath dijkstraSPC = new DijkstraShortPath(dijkstraData);
+		DijkstraShortPath dijkstraSPC = new DijkstraShortPath(dijkstraData, 8);
 		
 		// solving the problem of strongly connected components if it is possible
 		/*
@@ -130,7 +128,7 @@ public class Program {
 		
 		// solving the problem of Dijkstra Shortest Path if it is possible
 		if (dijkstraData != null && dijkstraData.size() > 0) {
-			int[] dijkstraAnswer = dijkstraSPC.dijkstraShortestPath();
+			int[] dijkstraAnswer = dijkstraSPC.dijkstraShortestPath(1);
 	
 			// printing the result
 			System.out.println("RESULTS OF THE DIJKSTRA SHORTEST PATH PROBLEM:");

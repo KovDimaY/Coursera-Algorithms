@@ -96,6 +96,7 @@ public class Program {
 		// List<int[]> SCCData = SCCDataFile.getContenLineList();
 		List<List<int[]>> dijkstraData = dijkstraDataFile.getContentArrayList();
 		
+		/*
 		for (int i = 0; i < dijkstraData.size(); i++) {
 			for (int j = 0; j < dijkstraData.get(i).size(); j++) {
 				System.out.print(Arrays.toString(dijkstraData.get(i).get(j)));
@@ -104,6 +105,7 @@ public class Program {
 			System.out.println("");
 		}
 		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n");
+		*/
 		
 		
 		// initializing counters

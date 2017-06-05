@@ -85,33 +85,23 @@ public class Program {
 
 	public static void secondCourseProblems() {
 		// files with data provided by Coursera
-		// MyFileReader SCCDataFile = new MyFileReader("CCSData.txt", 
-		//											MyFileReader.DataType.LINE);
+		MyFileReader SCCDataFile = new MyFileReader("CCSData.txt", 
+													MyFileReader.DataType.LINE);
 		
-		MyFileReader dijkstraDataFile = new MyFileReader("test.txt", 
+		MyFileReader dijkstraDataFile = new MyFileReader("DijkstraData.txt", 
 				MyFileReader.DataType.ARRAY);
 		
 		
 		// getting data from the file
-		// List<int[]> SCCData = SCCDataFile.getContenLineList();
+		List<int[]> SCCData = SCCDataFile.getContenLineList();
 		List<List<int[]>> dijkstraData = dijkstraDataFile.getContentArrayList();
 		
-		for (int i = 0; i < dijkstraData.size(); i++) {
-			for (int j = 0; j < dijkstraData.get(i).size(); j++) {
-				System.out.print(Arrays.toString(dijkstraData.get(i).get(j)));
-				System.out.print(",  ");
-			}
-			System.out.println("");
-		}
-		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n");
-		
-		
+				
 		// initializing counters
-		// SCCCounter sccCounter = new SCCCounter(SCCData, 875714);
-		DijkstraShortPath dijkstraSPC = new DijkstraShortPath(dijkstraData, 8);
+		SCCCounter sccCounter = new SCCCounter(SCCData, 875714);
+		DijkstraShortPath dijkstraSPC = new DijkstraShortPath(dijkstraData, 200);
 		
 		// solving the problem of strongly connected components if it is possible
-		/*
 		if (SCCData != null && SCCData.size() > 0) {
 			int[] scc = sccCounter.fiveLargestSCC();
 	
@@ -123,7 +113,7 @@ public class Program {
 			System.out.println("Sorry, but your data is invalid. "
 					+ "Check it please and try again!");
 		}
-		*/
+		
 		
 		
 		// solving the problem of Dijkstra Shortest Path if it is possible

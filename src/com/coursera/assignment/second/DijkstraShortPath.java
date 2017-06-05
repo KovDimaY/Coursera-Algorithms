@@ -23,14 +23,13 @@ public class DijkstraShortPath {
 	public int[] dijkstraShortestPath(int sourceNode) {
 		int[] result = new int[10];
 		this.graph = this.convertToGoodForm(graph);
-		List<Integer> processedNodes = new ArrayList();
+		List<Integer> processedNodes = new ArrayList<Integer>();
 		processedNodes.add(new Integer(sourceNode));
 		this.shortestDistances[sourceNode - 1] = 0;
 		int currentTale = sourceNode;
 		this.visitedNodes[currentTale - 1] = true;
 		
 		while (processedNodes.size() < this.numberOfNodes) {
-			System.out.println("Size: " + processedNodes.size());
 			int minDistance = 1000000;
 			int minNode = -1;
 			for (int i = 0; i < processedNodes.size(); i++) {
@@ -51,7 +50,20 @@ public class DijkstraShortPath {
 				this.shortestDistances[minNode - 1] = minDistance;
 			}
 		}
-		return this.shortestDistances;
+		
+		// fill the answer with the needed nodes
+		result[0] = this.shortestDistances[6];
+		result[1] = this.shortestDistances[36];
+		result[2] = this.shortestDistances[58];
+		result[3] = this.shortestDistances[81];
+		result[4] = this.shortestDistances[98];
+		result[5] = this.shortestDistances[114];
+		result[6] = this.shortestDistances[132];
+		result[7] = this.shortestDistances[164];
+		result[8] = this.shortestDistances[187];
+		result[9] = this.shortestDistances[196];
+		
+		return result;
 	}
 	
 	

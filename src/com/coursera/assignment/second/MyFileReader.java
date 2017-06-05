@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MyFileReader {
@@ -128,7 +127,7 @@ public class MyFileReader {
 	// reading data (line = several arrays of dimension 2) from the file
 	// list - because I do not know the length of the file
 	private List<List<int[]>> readArrayListFile() {
-		List<List<int[]>> result = new ArrayList();
+		List<List<int[]>> result = new ArrayList<List<int[]>>();
 		this.length = 0;
 
 		// This will reference one line at a time

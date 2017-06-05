@@ -46,11 +46,9 @@ public class SCCCounter {
 	
 	private void DFS_loop(List<List<Integer>> graph, int[] nodes) {
 		this.t = 0;
-		int s = 0;
 		
 		for (int i = nodes.length-1; i >= 0; i--) {
 			if (!this.visitedNodes[nodes[i]-1]) {
-				s = nodes[i];
 				DFS(graph, nodes[i]-1);
 			}
 			//saving component size:
@@ -91,7 +89,7 @@ public class SCCCounter {
 	}
 	
 	private List<List<Integer>> formatGraph(List<int[]> graph, int numberOfNodes, boolean directOrder) {
-		List<List<Integer>> result = new ArrayList();
+		List<List<Integer>> result = new ArrayList<List<Integer>>();
 		for (int n = 0; n < numberOfNodes; n++) {
 			result.add(new ArrayList<Integer>());
 		}

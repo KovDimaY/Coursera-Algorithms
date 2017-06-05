@@ -29,8 +29,6 @@ public class SCCCounter {
 	public int[] fiveLargestSCC() {		
 		List<List<Integer>> backwardOrder = this.formatGraph(this.graph, this.numberOfNodes, false);
 		List<List<Integer>> directOrder = this.formatGraph(this.graph, this.numberOfNodes, true);
-		System.out.println("backwardOrder: " + backwardOrder.size());
-		System.out.println("directOrder: " + directOrder.size());
 		int[] labels = new int[numberOfNodes];
 		this.finishingTimes = new int[numberOfNodes];
 		for(int i = 0; i < numberOfNodes; i++) {

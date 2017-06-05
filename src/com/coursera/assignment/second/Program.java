@@ -35,7 +35,7 @@ public class Program {
 		// getting data from the file
 		int[] data4inversions = inversionsDataFile.getContentNumArray();
 		int[] data4sort = sortDataFile.getContentNumArray();
-		List<int[]> data4graph = graphDataFile.getContenLinetList();
+		List<int[]> data4graph = graphDataFile.getContenLineList();
 
 		// solving the problem of inversions if it is possible
 		if (data4inversions != null && data4inversions.length > 0) {
@@ -75,7 +75,7 @@ public class Program {
 	
 			// printing the result
 			System.out.println("RESULTS OF THE MIN CUT PROBLEM:");
-			System.out.println("Min Cut: " + minCut);
+			System.out.println("Min Cut: " + minCut + "\n\n");
 		} else {
 			
 			System.out.println("Sorry, but your data is invalid. "
@@ -85,34 +85,61 @@ public class Program {
 
 	public static void secondCourseProblems() {
 		// files with data provided by Coursera
-		MyFileReader SCCDataFile = new MyFileReader("CCSData.txt", 
-													MyFileReader.DataType.LINE);
+		// MyFileReader SCCDataFile = new MyFileReader("CCSData.txt", 
+		//											MyFileReader.DataType.LINE);
+		
+		MyFileReader dijkstraDataFile = new MyFileReader("test.txt", 
+				MyFileReader.DataType.ARRAY);
+		
 		
 		// getting data from the file
-		List<int[]> SCCData = SCCDataFile.getContenLinetList();
+		// List<int[]> SCCData = SCCDataFile.getContenLineList();
+		List<List<int[]>> dijkstraData = dijkstraDataFile.getContentArrayList();
+		
+		for (int i = 0; i < dijkstraData.size(); i++) {
+			for (int j = 0; j < dijkstraData.get(i).size(); j++) {
+				System.out.print(Arrays.toString(dijkstraData.get(i).get(j)));
+				System.out.print(",  ");
+			}
+			System.out.println("");
+		}
+		System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n");
+		
 		
 		// initializing counters
-		SCCCounter sccCounter = new SCCCounter(SCCData, 875714);
-				
-		/*
-		for (int i=0; i<SCCData.size(); i++){
-			System.out.println(Arrays.toString(SCCData.get(i)));
-		}
-		System.out.println("*****************************************");
-		*/
+		// SCCCounter sccCounter = new SCCCounter(SCCData, 875714);
+		DijkstraShortPath dijkstraSPC = new DijkstraShortPath(dijkstraData);
 		
-		// solving the problem of min cut if it is possible
+		// solving the problem of strongly connected components if it is possible
+		/*
 		if (SCCData != null && SCCData.size() > 0) {
 			int[] scc = sccCounter.fiveLargestSCC();
 	
 			// printing the result
 			System.out.println("RESULTS OF THE SCC PROBLEM:");
-			System.out.println("Five biggest SCCs: " + Arrays.toString(scc));
+			System.out.println("Five biggest SCCs: " + Arrays.toString(scc) + "\n\n");
 		} else {
 			
 			System.out.println("Sorry, but your data is invalid. "
 					+ "Check it please and try again!");
 		}
+		*/
+		
+		
+		// solving the problem of Dijkstra Shortest Path if it is possible
+		if (dijkstraData != null && dijkstraData.size() > 0) {
+			int[] dijkstraAnswer = dijkstraSPC.dijkstraShortestPath();
+	
+			// printing the result
+			System.out.println("RESULTS OF THE DIJKSTRA SHORTEST PATH PROBLEM:");
+			System.out.println("Array with the answer: " + Arrays.toString(dijkstraAnswer) + "\n\n");
+		} else {
+			
+			System.out.println("Sorry, but your data is invalid. "
+					+ "Check it please and try again!");
+		}
+		
+		
 		
 	}
 }

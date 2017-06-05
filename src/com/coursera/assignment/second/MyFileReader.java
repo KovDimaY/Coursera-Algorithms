@@ -15,17 +15,20 @@ public class MyFileReader {
 	private List<Integer> contentNumList;
 	private int[] contentNumArray;
 	private List<int[]> contentLineList;
+	private List<List<int[]>> contentArrayList;
 	
-	public static enum DataType {LINE, NUMBER}
+	public static enum DataType {LINE, NUMBER, ARRAY}
 
 	public MyFileReader(String fileName, DataType type) {
 		this.path = "./resources/" + fileName;
 		if (type == DataType.NUMBER){
 			this.contentNumList = this.readNumFile();
 			this.contentNumArray = this.convertToNumArray();
-		} else {
+		} else if (type == DataType.LINE) {
 			this.contentLineList = this.readLineFile();
-		}		
+		} else {
+			this.contentArrayList = this.readArrayListFile();
+		}
 	}
 
 	public int getLength() {
@@ -40,8 +43,12 @@ public class MyFileReader {
 		return this.contentNumList;
 	}
 
-	public List<int[]> getContenLinetList() {
+	public List<int[]> getContenLineList() {
 		return this.contentLineList;
+	}
+	
+	public List<List<int[]>> getContentArrayList() {
+		return this.contentArrayList;
 	}
 
 	public String getPath() {
@@ -118,6 +125,39 @@ public class MyFileReader {
 	}
 	
 	
+	// reading data (line = several arrays of dimension 2) from the file
+	// list - because I do not know the length of the file
+	private List<List<int[]>> readArrayListFile() {
+		List<List<int[]>> result = new ArrayList();
+		this.length = 0;
+
+		// This will reference one line at a time
+		String line = null;
+		
+		try {
+			// FileReader reads text files in the default encoding.
+			FileReader fileReader = new FileReader(this.path);
+
+			// Wrap FileReader in BufferedReader.
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+			while ((line = bufferedReader.readLine()) != null) {
+				result.add(this.lineToArrayLine(line));
+				this.length++;				
+			}
+
+			// Always close files.
+			bufferedReader.close();
+		} catch (FileNotFoundException ex) {
+			System.out.println("Unable to open file '" + this.path + "'");
+		} catch (IOException ex) {
+			System.out.println("Error reading file '" + this.path + "'");
+		}
+
+		return result;
+	}
+	
+	
 	// converting to array of numbers 
 	// because arrays are more optimized and faster
 	private int[] convertToNumArray() {
@@ -132,7 +172,7 @@ public class MyFileReader {
 		
 	private int[] lineToArray(String line){
 		line = line + " ";
-		int[] result = new int[numOfNumbers(line)];
+		int[] result = new int[this.numOfNumbers(line)];
 		int currentNumIdx = 0;
 		int currentNum = 0;
 		
@@ -150,7 +190,43 @@ public class MyFileReader {
 		
 		return result;
 	}
+	
+	private List<int[]> lineToArrayLine(String line) {
+		line = line + " ";
+		List<int[]> result = new ArrayList<int[]>();
+		int currentNum = 0;
+		boolean addedLabelFlag = false;
+		int [] tempArray = new int[2];
 		
+		for (int i = 0; i < line.length()-1; i++){
+			if (!addedLabelFlag) {
+				if (Character.isDigit(line.charAt(i))){
+					int digit = Integer.parseInt(String.valueOf(line.charAt(i)));
+					currentNum = currentNum*10 + digit;
+					if (Character.isWhitespace(line.charAt(i+1))){
+						result.add(new int[]{currentNum});
+						currentNum = 0;
+						addedLabelFlag = true;
+					}
+				}						
+			} else {
+				if (Character.isDigit(line.charAt(i))){
+					int digit = Integer.parseInt(String.valueOf(line.charAt(i)));
+					currentNum = currentNum*10 + digit;
+					if (Character.isWhitespace(line.charAt(i+1))){
+						tempArray[1] = currentNum;
+						currentNum = 0;
+						result.add(tempArray.clone());
+					}						
+				} else if (!Character.isWhitespace(line.charAt(i))) {
+					tempArray[0] = currentNum;
+					currentNum = 0;
+				}
+			}
+		}
+		return result;
+	}
+	
 	private int numOfNumbers(String line){
 		int result = 0;
 		
@@ -165,4 +241,5 @@ public class MyFileReader {
 		}
 		return result;
 	}
+
 }

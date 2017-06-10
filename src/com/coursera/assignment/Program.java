@@ -1,7 +1,7 @@
-package com.coursera.assignment.second;
+package com.coursera.assignment;
 
-import java.util.List;
 import java.util.Arrays;
+import java.util.List;
 
 public class Program {
 
@@ -85,27 +85,25 @@ public class Program {
 
 	public static void secondCourseProblems() {
 		// files with data provided by Coursera
-		// MyFileReader SCCDataFile = new MyFileReader("CCSData.txt", 
-		//											MyFileReader.DataType.LINE);
+		MyFileReader SCCDataFile = new MyFileReader("CCSData.txt", 
+												MyFileReader.DataType.LINE);
 		
-		// MyFileReader dijkstraDataFile = new MyFileReader("DijkstraData.txt", 
-		// 											MyFileReader.DataType.ARRAY);
+		MyFileReader dijkstraDataFile = new MyFileReader("DijkstraData.txt", 
+												MyFileReader.DataType.ARRAY);
 		
 		MyFileReader medianDataFile = new MyFileReader("MeansHeapsData.txt", 
-				MyFileReader.DataType.NUMBER);
+												MyFileReader.DataType.NUMBER);
 		
 		// getting data from the file
-		// List<int[]> SCCData = SCCDataFile.getContenLineList();
-		// List<List<int[]>> dijkstraData = dijkstraDataFile.getContentArrayList();
+		List<int[]> SCCData = SCCDataFile.getContenLineList();
+		List<List<int[]>> dijkstraData = dijkstraDataFile.getContentArrayList();
 		int[] data4medians = medianDataFile.getContentNumArray();
 		
 				
 		// initializing counters
-		// SCCCounter sccCounter = new SCCCounter(SCCData, 875714);
-		// DijkstraShortPath dijkstraSPC = new DijkstraShortPath(dijkstraData, 200);
+		SCCCounter sccCounter = new SCCCounter(SCCData, 875714);
+		DijkstraShortPath dijkstraSPC = new DijkstraShortPath(dijkstraData, 200);
 		HeapMedians mediansCounter = new HeapMedians(data4medians.length);
-		
-		/*
 		
 		// solving the problem of strongly connected components if it is possible
 		if (SCCData != null && SCCData.size() > 0) {
@@ -121,7 +119,6 @@ public class Program {
 		}
 		
 		
-		
 		// solving the problem of Dijkstra Shortest Path if it is possible
 		if (dijkstraData != null && dijkstraData.size() > 0) {
 			int[] dijkstraAnswer = dijkstraSPC.dijkstraShortestPath(1);
@@ -134,9 +131,7 @@ public class Program {
 			System.out.println("Sorry, but your data is invalid. "
 					+ "Check it please and try again!");
 		}
-		
-		*/
-		
+			
 		
 		// solving the problem of Heap Sum of Medians if it is possible
 		if (data4medians != null && data4medians.length > 0) {
@@ -150,8 +145,5 @@ public class Program {
 			System.out.println("Sorry, but your data is invalid. "
 					+ "Check it please and try again!");
 		}
-		
-		
-		
 	}
 }

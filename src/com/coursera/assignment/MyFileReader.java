@@ -1,4 +1,4 @@
-package com.coursera.assignment.second;
+package com.coursera.assignment;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

@@ -1,4 +1,4 @@
-package com.coursera.assignment.second;
+package com.coursera.assignment;
 
 import java.util.ArrayList;
 import java.util.Arrays;

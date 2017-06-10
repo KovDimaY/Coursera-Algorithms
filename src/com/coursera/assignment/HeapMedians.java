@@ -1,4 +1,4 @@
-package com.coursera.assignment.second;
+package com.coursera.assignment;
 
 import com.coursera.helpers.MaxHeap;
 import com.coursera.helpers.MinHeap;

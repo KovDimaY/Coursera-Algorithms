@@ -1,7 +1,6 @@
-package com.coursera.assignment.second;
+package com.coursera.assignment;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 

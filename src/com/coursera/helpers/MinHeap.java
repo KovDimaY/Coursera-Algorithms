@@ -1,5 +1,7 @@
 package com.coursera.helpers;
 
+import java.util.Arrays;
+
 public class MinHeap
 {
     private int[] Heap;
@@ -13,7 +15,7 @@ public class MinHeap
         this.maxsize = maxsize;
         this.size = 0;
         this.Heap = new int[this.maxsize + 1];
-        this.Heap[0] = Integer.MIN_VALUE;
+        this.Heap[0] = Integer.MAX_VALUE;
     }
  
     private int parent(int pos)
@@ -93,5 +95,9 @@ public class MinHeap
     
     public int getMin() {
     	return this.Heap[ROOT];
+    }
+    
+    public String print() {
+    	return Arrays.toString(this.Heap);
     }
 }

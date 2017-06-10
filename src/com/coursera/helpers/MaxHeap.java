@@ -1,5 +1,7 @@
 package com.coursera.helpers;
 
+import java.util.Arrays;
+
 public class MaxHeap {
 	
 	private int[] Heap;
@@ -93,5 +95,9 @@ public class MaxHeap {
     
     public int getMax() {
     	return this.Heap[ROOT];
+    }
+    
+    public String print() {
+    	return Arrays.toString(this.Heap);
     }
 }

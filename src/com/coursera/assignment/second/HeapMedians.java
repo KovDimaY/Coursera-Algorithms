@@ -32,6 +32,8 @@ public class HeapMedians {
 		for (int i = 1; i < data.length; i++) {
 			System.out.println("Step " + (i+1) + ":");
 			System.out.println(data[i]);
+			System.out.println(this.smallHeap.print());
+			System.out.println(this.bigHeap.print());
 			
 			if (data[i] > this.smallHeap.getMax()) {
 				this.bigHeap.insert(data[i]);
@@ -47,6 +49,7 @@ public class HeapMedians {
 			
 			result += this.smallHeap.getMax();
 			result %= 10000;
+			System.out.println("median = " + this.smallHeap.getMax());
 			System.out.println(result);
 			System.out.println();
 		}

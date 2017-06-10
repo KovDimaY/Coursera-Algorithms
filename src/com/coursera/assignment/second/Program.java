@@ -91,7 +91,7 @@ public class Program {
 		// MyFileReader dijkstraDataFile = new MyFileReader("DijkstraData.txt", 
 		// 											MyFileReader.DataType.ARRAY);
 		
-		MyFileReader medianDataFile = new MyFileReader("test.txt", 
+		MyFileReader medianDataFile = new MyFileReader("MeansHeapsData.txt", 
 				MyFileReader.DataType.NUMBER);
 		
 		// getting data from the file

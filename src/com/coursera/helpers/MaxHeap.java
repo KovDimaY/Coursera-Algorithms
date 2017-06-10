@@ -15,27 +15,27 @@ public class MaxHeap {
         this.maxsize = maxsize;
         this.size = 0;
         this.Heap = new int[this.maxsize + 1];
-        this.Heap[0] = Integer.MIN_VALUE;
+        Arrays.fill(this.Heap, Integer.MIN_VALUE);
     }
  
     private int parent(int pos)
     {
-        return pos / 2;
+        return (pos - 1) / 2;
     }
  
     private int leftChild(int pos)
     {
-        return (2 * pos);
+        return (2 * pos) + 1;
     }
  
     private int rightChild(int pos)
     {
-        return (2 * pos) + 1;
+        return (2 * pos) + 2;
     }
  
     private boolean isLeaf(int pos)
     {
-        if (pos >=  (this.size / 2)  &&  pos <= this.size)
+    	if (pos >=  (size / 2)  &&  pos <= size)
         { 
             return true;
         }
@@ -71,9 +71,9 @@ public class MaxHeap {
  
     public void insert(int element)
     {
-        this.Heap[++this.size] = element;
-        int current = this.size;
- 
+        this.Heap[this.size++] = element;
+        int current = this.size-1;
+        
         while (this.Heap[current] > this.Heap[this.parent(current)])
         {
             this.swap(current, this.parent(current));
@@ -84,7 +84,8 @@ public class MaxHeap {
     public int remove()
     {
         int popped = this.Heap[ROOT];
-        this.Heap[ROOT] = this.Heap[this.size--]; 
+        this.Heap[ROOT] = this.Heap[this.size-1];
+        this.Heap[this.size--] = Integer.MIN_VALUE;
         this.maxHeapify(ROOT);
         return popped;
     }

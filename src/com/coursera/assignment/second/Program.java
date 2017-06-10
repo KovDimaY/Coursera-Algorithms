@@ -85,21 +85,27 @@ public class Program {
 
 	public static void secondCourseProblems() {
 		// files with data provided by Coursera
-		MyFileReader SCCDataFile = new MyFileReader("CCSData.txt", 
-													MyFileReader.DataType.LINE);
+		// MyFileReader SCCDataFile = new MyFileReader("CCSData.txt", 
+		//											MyFileReader.DataType.LINE);
 		
-		MyFileReader dijkstraDataFile = new MyFileReader("DijkstraData.txt", 
-				MyFileReader.DataType.ARRAY);
+		// MyFileReader dijkstraDataFile = new MyFileReader("DijkstraData.txt", 
+		// 											MyFileReader.DataType.ARRAY);
 		
+		MyFileReader medianDataFile = new MyFileReader("test.txt", 
+				MyFileReader.DataType.NUMBER);
 		
 		// getting data from the file
-		List<int[]> SCCData = SCCDataFile.getContenLineList();
-		List<List<int[]>> dijkstraData = dijkstraDataFile.getContentArrayList();
+		// List<int[]> SCCData = SCCDataFile.getContenLineList();
+		// List<List<int[]>> dijkstraData = dijkstraDataFile.getContentArrayList();
+		int[] data4medians = medianDataFile.getContentNumArray();
 		
 				
 		// initializing counters
-		SCCCounter sccCounter = new SCCCounter(SCCData, 875714);
-		DijkstraShortPath dijkstraSPC = new DijkstraShortPath(dijkstraData, 200);
+		// SCCCounter sccCounter = new SCCCounter(SCCData, 875714);
+		// DijkstraShortPath dijkstraSPC = new DijkstraShortPath(dijkstraData, 200);
+		HeapMedians mediansCounter = new HeapMedians();
+		
+		/*
 		
 		// solving the problem of strongly connected components if it is possible
 		if (SCCData != null && SCCData.size() > 0) {
@@ -123,6 +129,22 @@ public class Program {
 			// printing the result
 			System.out.println("RESULTS OF THE DIJKSTRA SHORTEST PATH PROBLEM:");
 			System.out.println("Array with the answer: " + Arrays.toString(dijkstraAnswer) + "\n\n");
+		} else {
+			
+			System.out.println("Sorry, but your data is invalid. "
+					+ "Check it please and try again!");
+		}
+		
+		*/
+		
+		
+		// solving the problem of Heap Sum of Medians if it is possible
+		if (data4medians != null && data4medians.length > 0) {
+			int mediansAnswer = mediansCounter.sumOfMedians(data4medians);
+	
+			// printing the result
+			System.out.println("RESULTS OF THE HEAPS MEDIANS PROBLEM:");
+			System.out.println("Sum of all medians (mod 10000): " + mediansAnswer + "\n\n");
 		} else {
 			
 			System.out.println("Sorry, but your data is invalid. "

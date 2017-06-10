@@ -103,7 +103,7 @@ public class Program {
 		// initializing counters
 		// SCCCounter sccCounter = new SCCCounter(SCCData, 875714);
 		// DijkstraShortPath dijkstraSPC = new DijkstraShortPath(dijkstraData, 200);
-		HeapMedians mediansCounter = new HeapMedians();
+		HeapMedians mediansCounter = new HeapMedians(data4medians.length);
 		
 		/*
 		

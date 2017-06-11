@@ -124,10 +124,13 @@ and then just execute the program to get a result.
 ### 6. "Median Maintenance" using Heaps
 The text file contains a list of the integers from 1 to 10000 in unsorted order; it should be treated as a stream of numbers, arriving one by one. Letting x_i denote the i-th number of the file, the k-th median m_k is defined as the median of the numbers x_1,…,x_k. (So, if k is odd, then m_k is ((k+1)/2)-th smallest number among x_1,…,x_k; if k is even, then m_k is the (k/2)-th smallest number among x_1,…,x_k.)
 
-As the answer it should be provided the sum of these 10000 medians, modulo 10000 (i.e., only the last 4 digits). I.e., it should be computed (m1 + m2 + m3 + ⋯ + m10000) mod 10000.
+As the answer it should be provided the sum of these 10000 medians, modulo 10000 (i.e., only the last 4 digits). I.e., it should be computed (m_1 + m_2 + m_3 + ⋯ + m_10000) mod 10000.
 
 #### What is a heap
 In computer science, a heap is a specialized tree-based data structure that satisfies the heap property: if P is a parent node of C, then the key (the value) of node P is ordered with respect to the key of node C with the same ordering applying across the heap. A heap can be classified further as either a "max heap" or a "min heap". In a max heap, the keys of parent nodes are always greater than or equal to those of the children and the highest key is in the root node. In a min heap, the keys of parent nodes are less than or equal to those of the children and the lowest key is in the root node.
+
+#### Relevance
+The heap is one maximally efficient implementation of an abstract data type called a priority queue, and in fact priority queues are often referred to as "heaps", regardless of how they may be implemented. A common implementation of a heap is the binary heap, in which the tree is a complete binary tree. The heap data structure, specifically the binary heap, was introduced by J. W. J. Williams in 1964, as a data structure for the heapsort sorting algorithm. Heaps are also crucial in several efficient graph algorithms such as Dijkstra's algorithm. In a heap, the highest (or lowest) priority element is always stored at the root. A heap is not a sorted structure and can be regarded as partially ordered. There is no particular relationship among nodes on any given level, even among the siblings. When a heap is a complete binary tree, it has a smallest possible height—a heap with N nodes always has log N height. A heap is a useful data structure when you need to remove the object with the highest (or lowest) priority.
 
 #### How to use the application
 You can put `.txt` file with your data inside the folder `/resources` and in the main method of the class `Program` put the name of your file at the line 

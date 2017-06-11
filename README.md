@@ -119,3 +119,20 @@ also you need to know how many nodes does graph have and you have to put this da
 DijkstraShortPath dijkstraSPC = new DijkstraShortPath(dijkstraData, 200);
 ``` 
 and then just execute the program to get a result.
+
+
+### 6. "Median Maintenance" using Heaps
+The text file contains a list of the integers from 1 to 10000 in unsorted order; it should be treated as a stream of numbers, arriving one by one. Letting x_i denote the i-th number of the file, the k-th median m_k is defined as the median of the numbers x_1,…,x_k. (So, if k is odd, then m_k is ((k+1)/2)-th smallest number among x_1,…,x_k; if k is even, then m_k is the (k/2)-th smallest number among x_1,…,x_k.)
+
+As the answer it should be provided the sum of these 10000 medians, modulo 10000 (i.e., only the last 4 digits). I.e., it should be computed (m1 + m2 + m3 + ⋯ + m10000) mod 10000.
+
+#### What is a heap
+In computer science, a heap is a specialized tree-based data structure that satisfies the heap property: if P is a parent node of C, then the key (the value) of node P is ordered with respect to the key of node C with the same ordering applying across the heap. A heap can be classified further as either a "max heap" or a "min heap". In a max heap, the keys of parent nodes are always greater than or equal to those of the children and the highest key is in the root node. In a min heap, the keys of parent nodes are less than or equal to those of the children and the lowest key is in the root node.
+
+#### How to use the application
+You can put `.txt` file with your data inside the folder `/resources` and in the main method of the class `Program` put the name of your file at the line 
+```java
+// file with data provided by Coursera
+MyFileReader medianDataFile = new MyFileReader("MeansHeapsData.txt", MyFileReader.DataType.NUMBER);
+``` 
+and then just execute the program to get a result.

@@ -15,7 +15,28 @@ public class Program {
 		// firstCourseProblems();
 		
 		// Graph Search Algorithms
-		secondCourseProblems();
+		// secondCourseProblems();
+		
+		MyFileReader sumDataFile = new MyFileReader("test.txt", 
+				MyFileReader.DataType.NUMBER);
+		
+		SumCounter sumCounter = new SumCounter();
+		int[] data4sum = sumDataFile.getContentNumArray();
+		
+		// solving the problem of inversions if it is possible
+		if (data4sum != null && data4sum.length > 0) {
+			long answer = sumCounter.numberSums(data4sum);
+
+			// printing the result
+			System.out.println("RESULTS OF THE 2-SUM PROBLEM:");
+			System.out.println("Number of target values: " + answer + "\n\n");
+		} else {
+
+			System.out.println("Sorry, but your data is invalid. "
+					+ "Check it please and try again!");
+		}
+		
+		
 	}
 	
 	public static void firstCourseProblems() {

@@ -2,6 +2,8 @@ package com.coursera.assignment;
 
 import java.util.Arrays;
 
+import com.coursera.helpers.CustomHashTable;
+
 public class SumCounter {
 	
 	public int numberSums(int[] data, int[] interval) {
@@ -30,6 +32,10 @@ public class SumCounter {
 			}
 		} 
 		return false;
+	}
+	
+	private CustomHashTable convertToHashTable(int[] data) {
+		return null;
 	}
 
 }

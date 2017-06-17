@@ -23,9 +23,12 @@ public class Program {
 		SumCounter sumCounter = new SumCounter();
 		int[] data4sum = sumDataFile.getContentNumArray();
 		
+		
+		
 		// solving the problem of inversions if it is possible
 		if (data4sum != null && data4sum.length > 0) {
-			long answer = sumCounter.numberSums(data4sum);
+			int [] interval = new int[]{3,10};
+			int answer = sumCounter.numberSums(data4sum, interval);
 
 			// printing the result
 			System.out.println("RESULTS OF THE 2-SUM PROBLEM:");

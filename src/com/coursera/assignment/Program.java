@@ -17,17 +17,17 @@ public class Program {
 		// Graph Search Algorithms
 		// secondCourseProblems();
 		
-		MyFileReader sumDataFile = new MyFileReader("test.txt", 
-				MyFileReader.DataType.NUMBER);
+		MyFileReader sumDataFile = new MyFileReader("HashSumData.txt", 
+				MyFileReader.DataType.BIGNUMBER);
 		
 		SumCounter sumCounter = new SumCounter();
-		int[] data4sum = sumDataFile.getContentNumArray();
+		long[] data4sum = sumDataFile.getContentLongNumArray();
 		
 		
 		
 		// solving the problem of inversions if it is possible
 		if (data4sum != null && data4sum.length > 0) {
-			int [] interval = new int[]{3,10};
+			int [] interval = new int[]{-10000,10000};
 			int answer = sumCounter.numberSums(data4sum, interval);
 
 			// printing the result

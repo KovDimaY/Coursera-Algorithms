@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,11 +13,13 @@ public class MyFileReader {
 	private String path;
 	private int length;
 	private List<Integer> contentNumList;
+	private List<BigInteger> contentLongNumList;
 	private int[] contentNumArray;
+	private long[] contentLongNumArray;
 	private List<int[]> contentLineList;
 	private List<List<int[]>> contentArrayList;
 	
-	public static enum DataType {LINE, NUMBER, ARRAY}
+	public static enum DataType {LINE, NUMBER, ARRAY, BIGNUMBER}
 
 	public MyFileReader(String fileName, DataType type) {
 		this.path = "./resources/" + fileName;
@@ -25,8 +28,11 @@ public class MyFileReader {
 			this.contentNumArray = this.convertToNumArray();
 		} else if (type == DataType.LINE) {
 			this.contentLineList = this.readLineFile();
-		} else {
+		} else if (type == DataType.ARRAY){
 			this.contentArrayList = this.readArrayListFile();
+		} else {
+			this.contentLongNumList = this.readBigNumFile();
+			this.contentLongNumArray = this.convertToLongNumArray();
 		}
 	}
 
@@ -36,6 +42,10 @@ public class MyFileReader {
 
 	public int[] getContentNumArray() {
 		return this.contentNumArray;
+	}
+	
+	public long[] getContentLongNumArray() {
+		return this.contentLongNumArray;
 	}
 
 	public List<Integer> getContenNumtList() {
@@ -75,7 +85,7 @@ public class MyFileReader {
 					result.add(new Integer(line));
 					this.length++;
 				} catch (NumberFormatException e) {
-					System.out.println(line + "does not have correct format");
+					System.out.println("'" + line + "' - does not have correct format");
 					return null;
 				}
 			}
@@ -91,6 +101,45 @@ public class MyFileReader {
 		return result;
 	}
 
+	
+	// reading data (line = one really big number) from the file
+	// list - because I do not know the length of the file
+	private List<BigInteger> readBigNumFile() {
+		List<BigInteger> result = new ArrayList<BigInteger>();
+		this.length = 0;
+
+		// This will reference one line at a time
+		String line = null;
+
+		try {
+			// FileReader reads text files in the default encoding.
+			FileReader fileReader = new FileReader(this.path);
+
+			// Wrap FileReader in BufferedReader.
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+			while ((line = bufferedReader.readLine()) != null) {
+				try {
+					result.add(new BigInteger(line));
+					this.length++;
+				} catch (NumberFormatException e) {
+					System.out.println("'" + line + "' - does not have correct format");
+					return null;
+				}
+			}
+
+			// Always close files.
+			bufferedReader.close();
+		} catch (FileNotFoundException ex) {
+			System.out.println("Unable to open file '" + this.path + "'");
+		} catch (IOException ex) {
+			System.out.println("Error reading file '" + this.path + "'");
+		}
+
+		return result;
+	}
+		
+		
 	// reading data (line = several numbers) from the file
 	// list - because I do not know the length of the file
 	private List<int[]> readLineFile() {
@@ -165,6 +214,16 @@ public class MyFileReader {
 
 		for (int i = 0; i < list.size(); i++) {
 			array[i] = list.get(i).intValue();
+		}
+		return array;
+	}
+	
+	private long[] convertToLongNumArray() {
+		List<BigInteger> list = this.contentLongNumList;
+		long[] array = new long[list.size()];
+
+		for (int i = 0; i < list.size(); i++) {
+			array[i] = list.get(i).longValue();
 		}
 		return array;
 	}

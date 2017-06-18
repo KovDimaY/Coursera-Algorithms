@@ -15,30 +15,7 @@ public class Program {
 		// firstCourseProblems();
 		
 		// Graph Search Algorithms
-		// secondCourseProblems();
-		
-		MyFileReader sumDataFile = new MyFileReader("HashSumData.txt", 
-				MyFileReader.DataType.BIGNUMBER);
-		
-		SumCounter sumCounter = new SumCounter();
-		long[] data4sum = sumDataFile.getContentLongNumArray();
-		
-		
-		
-		// solving the problem of inversions if it is possible
-		if (data4sum != null && data4sum.length > 0) {
-			int [] interval = new int[]{-10000,10000};
-			int answer = sumCounter.numberSums(data4sum, interval);
-
-			// printing the result
-			System.out.println("RESULTS OF THE 2-SUM PROBLEM:");
-			System.out.println("Number of target values: " + answer + "\n\n");
-		} else {
-
-			System.out.println("Sorry, but your data is invalid. "
-					+ "Check it please and try again!");
-		}
-		
+		secondCourseProblems();
 		
 	}
 	
@@ -118,16 +95,21 @@ public class Program {
 		MyFileReader medianDataFile = new MyFileReader("MeansHeapsData.txt", 
 												MyFileReader.DataType.NUMBER);
 		
+		MyFileReader sumDataFile = new MyFileReader("HashSumData.txt", 
+				MyFileReader.DataType.BIGNUMBER);
+		
 		// getting data from the file
 		List<int[]> SCCData = SCCDataFile.getContenLineList();
 		List<List<int[]>> dijkstraData = dijkstraDataFile.getContentArrayList();
 		int[] data4medians = medianDataFile.getContentNumArray();
+		long[] data4sum = sumDataFile.getContentLongNumArray();
 		
 				
 		// initializing counters
 		SCCCounter sccCounter = new SCCCounter(SCCData, 875714);
 		DijkstraShortPath dijkstraSPC = new DijkstraShortPath(dijkstraData, 200);
 		HeapMedians mediansCounter = new HeapMedians(data4medians.length);
+		SumCounter sumCounter = new SumCounter();
 		
 		// solving the problem of strongly connected components if it is possible
 		if (SCCData != null && SCCData.size() > 0) {
@@ -166,6 +148,21 @@ public class Program {
 			System.out.println("Sum of all medians (mod 10000): " + mediansAnswer + "\n\n");
 		} else {
 			
+			System.out.println("Sorry, but your data is invalid. "
+					+ "Check it please and try again!");
+		}
+		
+		
+		// solving the problem of Hashtable 2-SUM if it is possible
+		if (data4sum != null && data4sum.length > 0) {
+			int [] interval = new int[]{-10000,10000};
+			int answer = sumCounter.numberSums(data4sum, interval);
+
+			// printing the result
+			System.out.println("RESULTS OF THE 2-SUM PROBLEM:");
+			System.out.println("Number of target values: " + answer + "\n\n");
+		} else {
+
 			System.out.println("Sorry, but your data is invalid. "
 					+ "Check it please and try again!");
 		}

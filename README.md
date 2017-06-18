@@ -139,3 +139,39 @@ You can put `.txt` file with your data inside the folder `/resources` and in the
 MyFileReader medianDataFile = new MyFileReader("MeansHeapsData.txt", MyFileReader.DataType.NUMBER);
 ``` 
 and then just execute the program to get a result.
+
+
+### 7. "Sum of Two" using Hash-Tables
+The file contains 1 million integers (long integers), both positive and negative (there might be some repetitions!). This is an array of integers, with the i-th row of the file specifying the ith entry of the array.
+
+The task is to compute the number of target values t in the interval [-10000,10000] (inclusive) such that there are distinct numbers x,y in the input file that satisfy x+y=t. This task is very resource consuming even if implemented with efficient hash tables, so do not try to use brute force algorithms :)
+
+#### What is a hash-table
+In computing, a hash table (hash map) is a data structure which implements an associative array abstract data type, a structure that can map keys to values. A hash table uses a hash function to compute an index into an array of buckets or slots, from which the desired value can be found.
+
+Ideally, the hash function will assign each key to a unique bucket, but most hash table designs employ an imperfect hash function, which might cause hash collisions where the hash function generates the same index for more than one key. Such collisions must be accommodated in some way.
+
+#### Relevance
+The main advantage of hash tables over other table data structures is speed. This advantage is more apparent when the number of entries is large. Hash tables are particularly efficient when the maximum number of entries can be predicted in advance, so that the bucket array can be allocated once with the optimum size and never resized.
+
+If the set of key-value pairs is fixed and known ahead of time (so insertions and deletions are not allowed), one may reduce the average lookup cost by a careful choice of the hash function, bucket table size, and internal data structures. In particular, one may be able to devise a hash function that is collision-free, or even perfect. In this case the keys need not be stored in the table.
+
+#### How to use the application
+You can put `.txt` file with your data inside the folder `/resources` and in the main method of the class `Program` put the name of your file at the line 
+```java
+// file with data provided by Coursera
+MyFileReader sumDataFile = new MyFileReader("HashSumData.txt", MyFileReader.DataType.BIGNUMBER);
+``` 
+
+also you need to know the interval of values of sums and you have to put this data in the next line
+```java
+// solving the problem of Hashtable 2-SUM if it is possible
+if (data4sum != null && data4sum.length > 0) {
+  int [] interval = new int[]{-10000,10000};
+  int answer = sumCounter.numberSums(data4sum, interval);
+  ....... other code
+}
+``` 
+and then just execute the program to get a result.
+
+! NOTE: This algorithm implemented with the build-in hash tables, that are extremelly efficient, but it took about 40 minutes to finish the job. Later I am going to implement several custom hash tables to check if it will work with the same of different speed.

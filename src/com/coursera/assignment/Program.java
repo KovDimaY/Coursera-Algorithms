@@ -15,7 +15,30 @@ public class Program {
 		// firstCourseProblems();
 		
 		// Graph Search Algorithms
-		secondCourseProblems();
+		// secondCourseProblems();
+		
+		MyFileReader sumDataFile = new MyFileReader("HashSumData.txt", 
+				MyFileReader.DataType.BIGNUMBER);
+		
+		long[] data4sum = sumDataFile.getContentLongNumArray();
+		
+		SumCounter sumCounter = new SumCounter();
+		
+		// solving the problem of Hashtable 2-SUM if it is possible
+		if (data4sum != null && data4sum.length > 0) {
+			int [] interval = new int[]{-500,500};
+			int answer = sumCounter.numberSums(data4sum, interval);
+			
+
+			// printing the result
+			System.out.println("\n\nRESULTS OF THE 2-SUM PROBLEM:");
+			System.out.println("Number of target values: " + answer);
+			System.out.println("Correct answer: 21");
+		} else {
+
+			System.out.println("Sorry, but your data is invalid. "
+					+ "Check it please and try again!");
+		}
 		
 	}
 	

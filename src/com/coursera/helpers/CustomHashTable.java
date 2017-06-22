@@ -1,5 +1,7 @@
 package com.coursera.helpers;
 
+// Hash Table with "OPEN ADRESSING" approach
+// Hashing the data until the bucket of the array will not be empty 
 public class CustomHashTable {
 	
 	private CustomElement[] table;
@@ -21,12 +23,12 @@ public class CustomHashTable {
 		return this.maxSize/2;
 	}
 	
-	public void insert(long element) {
+	public void put(long element, boolean value) {
 		if (this.size < this.maxSize) {
 			int hash = this.hashFunction(element);
 			if (this.table[hash] == null) {
 				this.size++;
-				this.table[hash] = new CustomElement(element, true); 
+				this.table[hash] = new CustomElement(element, value); 
 			} else {
 				int shift = this.hashShift(element);
 				while(this.table[hash] != null && this.table[hash].getKey() != element) {
@@ -38,7 +40,7 @@ public class CustomHashTable {
 				}
 				if (this.table[hash] == null) {
 					this.size++;
-					this.table[hash] = new CustomElement(element, true); 
+					this.table[hash] = new CustomElement(element, value); 
 				}
 			}
 		} else {
@@ -63,7 +65,7 @@ public class CustomHashTable {
         }
 	}
 	
-	public boolean find(long element) {
+	public boolean containsKey(long element) {
 		int hash = this.hashFunction(element);
 		int shift = this.hashShift(element);
 		

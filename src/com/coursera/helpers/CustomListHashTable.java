@@ -1,5 +1,8 @@
 package com.coursera.helpers;
 
+// Hash Table with "SEPARATE CHAINING" approach
+// Each bucket of the array is a List of elements
+// Hashing the data once and then iterating through the list
 public class CustomListHashTable {
 	
 	private CustomListElement[] table;

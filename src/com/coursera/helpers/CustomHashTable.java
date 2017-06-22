@@ -98,7 +98,4 @@ public class CustomHashTable {
 		}
 		return this.SHIFT_HELPER[result];
 	}
-	
-	
-	
 }

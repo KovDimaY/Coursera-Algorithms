@@ -30,7 +30,7 @@ public class CustomListElement {
 		return false;
 	}
 	
-	public void put(long key, boolean value) {
+	public boolean put(long key, boolean value) {
 		boolean keyFound = false;
 		for (int i = 0; i < this.list.size() && !keyFound; i++) {
 			if (this.list.get(i).getKey() == key) {
@@ -39,6 +39,7 @@ public class CustomListElement {
 			}
 		}
 		this.list.add(new CustomElement(key, value));
+		return !keyFound;
 	}
 	
 	public void delete(long key) {

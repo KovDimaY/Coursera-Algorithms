@@ -23,14 +23,16 @@ public class CustomListHashTable {
 		return this.maxSize/2;
 	}
 	
-	public void insert(long element) {
+	public void put(long element, boolean value) {
 		if (this.size < this.maxSize) {
 			int hash = this.hashFunction(element);
-			this.size++;
 			if (this.table[hash] == null) {
-				this.table[hash] = new CustomListElement(element, true); 
+				this.table[hash] = new CustomListElement(element, value); 
+				this.size++;
 			} else {
-				this.table[hash].put(element, true); 
+				if (this.table[hash].put(element, value)) {
+					this.size++;
+				} 
 			}
 		} else {
 			System.out.println("Sorry, but Hash Table is full!");
@@ -44,7 +46,7 @@ public class CustomListHashTable {
 		}
 	}
 	
-	public boolean find(long element) {
+	public boolean containsKey(long element) {
 		int hash = this.hashFunction(element);
 		if (this.table[hash] != null) {
 			return this.table[hash].findKey(element);

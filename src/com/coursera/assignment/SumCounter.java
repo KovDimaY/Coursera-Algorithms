@@ -14,10 +14,10 @@ public class SumCounter {
 		// Hashtable hashtable = new Hashtable(2*data.length);
 		 
 		// My custom hash table with "OPEN ADRESSING" approach 
-		CustomHashTable hashtable = new CustomHashTable(data.length);
+		// CustomHashTable hashtable = new CustomHashTable(data.length);
 		
 		// My custom hash table with "SEPARATE CHAINING" approach 
-		// CustomListHashTable hashtable = new CustomListHashTable(data.length);
+		CustomListHashTable hashtable = new CustomListHashTable(data.length);
 		
 		// logs to see the performance of the HT and the process of solving the problem
 		// System.out.println("Elements in the input array: " + data.length);

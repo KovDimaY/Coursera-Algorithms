@@ -174,4 +174,22 @@ if (data4sum != null && data4sum.length > 0) {
 ``` 
 and then just execute the program to get a result.
 
-! NOTE: This algorithm implemented with the build-in hash tables, that are extremelly efficient, but it took about 40 minutes to finish the job. Later I am going to implement several custom hash tables to check if it will work with the same of different speed.
+! NOTE: This algorithm implemented with the build-in hash tables, that are extremelly efficient, but it took about 40 minutes to finish the job. Later I implemented two custom hash tables to check if it will work with the same speed of different. Finally, my custom hash tables are a little bit slower (list approach the slowest one), but not very much. Actually even performance of my own hash tables is incredible if compare with my first brute-force approach, so yes, data structures are very important when you need high performance with a lot of data.
+
+To check performances of all the hash tables and compare them, just comment/uncomment following lines in the `SumCounter` class:
+
+```java
+public int numberSums(long[] data, int[] interval) {
+
+      // Build-in hashtable of java.util
+      Hashtable hashtable = new Hashtable(2*data.length);
+
+      // My custom hash table with "OPEN ADRESSING" approach 
+      // CustomHashTable hashtable = new CustomHashTable(data.length);
+
+      // My custom hash table with "SEPARATE CHAINING" approach 
+      // CustomListHashTable hashtable = new CustomListHashTable(data.length);
+
+          ....... other code
+}
+``` 
